@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FIFA World Cup 2026 Calendar</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.5;
+      max-width: 32rem;
+      margin: 0 auto;
+      padding: 1.5rem;
+      color: #1a1a1a;
+      background: #f8f9fa;
+    }
+    h1 { font-size: 1.5rem; margin: 0 0 0.25rem; }
+    .subtitle { color: #555; margin: 0 0 1.5rem; font-size: 0.95rem; }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,.08);
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 0.875rem 1rem;
+      font-size: 1rem;
+      font-weight: 600;
+      text-align: center;
+      text-decoration: none;
+      color: #fff;
+      background: #0066cc;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-bottom: 0.75rem;
+    }
+    .btn:active { background: #0052a3; }
+    .btn-secondary {
+      background: #e9ecef;
+      color: #333;
+    }
+    .btn-secondary:active { background: #dee2e6; }
+    label { font-size: 0.8rem; color: #666; display: block; margin-bottom: 0.35rem; }
+    input[type="text"] {
+      width: 100%;
+      padding: 0.6rem 0.75rem;
+      font-size: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      font-family: ui-monospace, monospace;
+    }
+    ol { padding-left: 1.25rem; margin: 0; }
+    li { margin-bottom: 0.5rem; }
+    li:last-child { margin-bottom: 0; }
+    .note { font-size: 0.85rem; color: #666; margin-top: 0.75rem; }
+  </style>
+</head>
+<body>
+  <h1>⚽ FIFA World Cup 2026</h1>
+  <p class="subtitle">Subscribe once — all 104 matches in your phone calendar.</p>
+
+  <div class="card">
+    <a id="subscribe" class="btn" href="#">Subscribe on iPhone / Apple Calendar</a>
+    <a id="download" class="btn btn-secondary" href="fifa-world-cup-2026.ics">Download calendar file</a>
+    <p class="note">After subscribing, your phone refreshes automatically (usually every 12–24 hours).</p>
+  </div>
+
+  <div class="card">
+    <label for="ics-url">Calendar URL (for Google Calendar or manual subscribe)</label>
+    <input id="ics-url" type="text" readonly>
+    <button type="button" class="btn btn-secondary" id="copy">Copy URL</button>
+  </div>
+
+  <div class="card">
+    <h2 style="font-size:1rem;margin:0 0 0.75rem;">Google Calendar</h2>
+    <ol>
+      <li>Copy the URL above.</li>
+      <li>Open <strong>Google Calendar</strong> on desktop.</li>
+      <li>Settings → <strong>Add calendar</strong> → <strong>From URL</strong>.</li>
+      <li>Paste the URL and save.</li>
+    </ol>
+  </div>
+
+  <script>
+    const icsUrl = new URL('fifa-world-cup-2026.ics', location.href).href;
+    const webcalUrl = icsUrl.replace(/^https?:/, 'webcal:');
+
+    document.getElementById('subscribe').href = webcalUrl;
+    document.getElementById('download').href = icsUrl;
+    document.getElementById('ics-url').value = icsUrl;
+
+    document.getElementById('copy').addEventListener('click', async () => {
+      const input = document.getElementById('ics-url');
+      try {
+        await navigator.clipboard.writeText(input.value);
+      } catch {
+        input.select();
+        document.execCommand('copy');
+      }
+      const btn = document.getElementById('copy');
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = 'Copy URL'; }, 2000);
+    });
+  </script>
+</body>
+</html>
