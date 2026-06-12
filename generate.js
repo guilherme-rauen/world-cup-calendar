@@ -932,6 +932,11 @@ function formatMatchTitle(home, away, fh, fa, result) {
   return `${fh} ${home} ${result.home} x ${result.away} ${fa} ${away}`;
 }
 
+function formatMatchDescription(n, phase, prefix) {
+  const line = `Match ${n} · FIFA World Cup 2026 · ${phase}`;
+  return prefix ? `${prefix} · ${line}` : line;
+}
+
 function formatGoalSuffix(goal) {
   if (goal.type === "og") return " (OG)";
   if (goal.type === "penalty") return " (P)";
@@ -1027,8 +1032,11 @@ for (const [
   const fa = FLAGS[away] || "";
   const result = results[n];
   const title = formatMatchTitle(home, away, fh, fa, result);
-  let desc = `Group ${grp} · Match ${n} · FIFA World Cup 2026\n${venue}, ${city}`;
-  if (n === 1) desc = `Opening Match · ${desc}`;
+  let desc = formatMatchDescription(
+    n,
+    `Group ${grp}`,
+    n === 1 ? "Opening Match" : undefined,
+  );
   desc = appendGoals(desc, result?.goals, home, away);
   events.push(
     vevent({
@@ -1061,7 +1069,7 @@ for (const [
   const title = result
     ? `${home} ${result.home} x ${result.away} ${away} — ${round}`
     : `${home} vs ${away} — ${round}`;
-  let desc = `${round} · Match ${n} · FIFA World Cup 2026\n${venue}, ${city}`;
+  let desc = formatMatchDescription(n, round);
   desc = appendGoals(desc, result?.goals, home, away);
   events.push(
     vevent({
