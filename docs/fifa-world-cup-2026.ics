@@ -10,24 +10,26 @@ REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
 BEGIN:VEVENT
 UID:wc2026-m1@worldcup2026.calendar
-DTSTAMP:20260611T000000Z
+DTSTAMP:20260612T062543Z
 DTSTART:20260611T190000Z
 DTEND:20260611T210000Z
-SUMMARY:🇲🇽 Mexico vs 🇿🇦 South Africa
+SUMMARY:🇲🇽 Mexico 2 x 0 🇿🇦 South Africa
 LOCATION:Estadio Azteca\, Mexico City
 DESCRIPTION:Opening Match · Group A · Match 1 · FIFA World Cup 2026\nEst
- adio Azteca\, Mexico City
+ adio Azteca\, Mexico City\n\nGoals:\n⚽ 9' Julián Quiñones 🇲🇽\n
+ ⚽ 67' Raúl Jiménez 🇲🇽
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:wc2026-m2@worldcup2026.calendar
-DTSTAMP:20260611T000000Z
+DTSTAMP:20260612T062543Z
 DTSTART:20260612T020000Z
 DTEND:20260612T040000Z
-SUMMARY:🇰🇷 South Korea vs 🇨🇿 Czechia
+SUMMARY:🇰🇷 South Korea 2 x 1 🇨🇿 Czechia
 LOCATION:Estadio Akron\, Zapopan
 DESCRIPTION:Group A · Match 2 · FIFA World Cup 2026\nEstadio Akron\, Zapo
- pan
+ pan\n\nGoals:\n⚽ 59' Ladislav Krejčí 🇨🇿\n⚽ 67' Hwang In-beom 
+ 🇰🇷\n⚽ 80' Oh Hyeon-gyu 🇰🇷
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT

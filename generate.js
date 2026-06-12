@@ -893,7 +893,62 @@ const knockout = [
   ],
 ];
 
+// Match results — add an entry after each match day.
+// goals: { minute, player, team: "home" | "away", type?: "og" | "penalty" }
+const results = {
+  1: {
+    home: 2,
+    away: 0,
+    goals: [
+      { minute: 9, player: "Julián Quiñones", team: "home" },
+      { minute: 67, player: "Raúl Jiménez", team: "home" },
+    ],
+  },
+  2: {
+    home: 2,
+    away: 1,
+    goals: [
+      { minute: 59, player: "Ladislav Krejčí", team: "away" },
+      { minute: 67, player: "Hwang In-beom", team: "home" },
+      { minute: 80, player: "Oh Hyeon-gyu", team: "home" },
+    ],
+  },
+};
+
 const pad = (n) => String(n).padStart(2, "0");
+
+function icsNow() {
+  const d = new Date();
+  return `${d.getUTCFullYear()}${pad(d.getUTCMonth() + 1)}${pad(d.getUTCDate())}T${pad(d.getUTCHours())}${pad(d.getUTCMinutes())}${pad(d.getUTCSeconds())}Z`;
+}
+
+function formatMinute(minute) {
+  if (minute > 90) return `90+${minute - 90}`;
+  return String(minute);
+}
+
+function formatMatchTitle(home, away, fh, fa, result) {
+  if (!result) return `${fh} ${home} vs ${fa} ${away}`;
+  return `${fh} ${home} ${result.home} x ${result.away} ${fa} ${away}`;
+}
+
+function formatGoalSuffix(goal) {
+  if (goal.type === "og") return " (OG)";
+  if (goal.type === "penalty") return " (P)";
+  return "";
+}
+
+function formatGoalLine(goal, home, away) {
+  const teamName = goal.team === "home" ? home : away;
+  const flag = FLAGS[teamName] || teamName;
+  return `⚽ ${formatMinute(goal.minute)}' ${goal.player} ${flag}${formatGoalSuffix(goal)}`;
+}
+
+function appendGoals(desc, goals, home, away) {
+  if (!goals?.length) return desc;
+  const lines = goals.map((g) => formatGoalLine(g, home, away));
+  return `${desc}\n\nGoals:\n${lines.join("\n")}`;
+}
 
 function icsStamp(month, day, etHour, etMin) {
   // ET = UTC-4 in June/July; add 4h and let Date normalize rollovers.
@@ -936,13 +991,14 @@ function vevent({
   title,
   location,
   description,
+  dtstamp = "20260611T000000Z",
 }) {
   const start = icsStamp(month, day, etHour, etMin);
   const end = icsStamp(month, day, etHour + 2, etMin); // ~2h match window
   return [
     "BEGIN:VEVENT",
     fold(`UID:wc2026-m${n}@worldcup2026.calendar`),
-    "DTSTAMP:20260611T000000Z",
+    `DTSTAMP:${dtstamp}`,
     `DTSTART:${start}`,
     `DTEND:${end}`,
     fold(`SUMMARY:${esc(title)}`),
@@ -969,9 +1025,11 @@ for (const [
 ] of groupStage) {
   const fh = FLAGS[home] || "";
   const fa = FLAGS[away] || "";
-  const title = `${fh} ${home} vs ${fa} ${away}`;
+  const result = results[n];
+  const title = formatMatchTitle(home, away, fh, fa, result);
   let desc = `Group ${grp} · Match ${n} · FIFA World Cup 2026\n${venue}, ${city}`;
   if (n === 1) desc = `Opening Match · ${desc}`;
+  desc = appendGoals(desc, result?.goals, home, away);
   events.push(
     vevent({
       n,
@@ -982,6 +1040,7 @@ for (const [
       title,
       location: `${venue}, ${city}`,
       description: desc,
+      dtstamp: result ? icsNow() : undefined,
     }),
   );
 }
@@ -998,8 +1057,12 @@ for (const [
   venue,
   city,
 ] of knockout) {
-  const title = `${home} vs ${away} — ${round}`;
-  const desc = `${round} · Match ${n} · FIFA World Cup 2026\n${venue}, ${city}`;
+  const result = results[n];
+  const title = result
+    ? `${home} ${result.home} x ${result.away} ${away} — ${round}`
+    : `${home} vs ${away} — ${round}`;
+  let desc = `${round} · Match ${n} · FIFA World Cup 2026\n${venue}, ${city}`;
+  desc = appendGoals(desc, result?.goals, home, away);
   events.push(
     vevent({
       n,
@@ -1010,6 +1073,7 @@ for (const [
       title,
       location: `${venue}, ${city}`,
       description: desc,
+      dtstamp: result ? icsNow() : undefined,
     }),
   );
 }
