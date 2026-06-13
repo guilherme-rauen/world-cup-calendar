@@ -913,6 +913,25 @@ const results = {
       { minute: 80, player: "Oh Hyeon-gyu", team: "home" },
     ],
   },
+  3: {
+    home: 1,
+    away: 1,
+    goals: [
+      { minute: 21, player: "Jovo Lukic", team: "away" },
+      { minute: 78, player: "Cyle Larin", team: "home" },
+    ],
+  },
+  4: {
+    home: 4,
+    away: 1,
+    goals: [
+      { minute: 7, player: "Damián Bobadilla", team: "away", type: "og" },
+      { minute: 31, player: "Folarin Balogun", team: "home" },
+      { minute: 95, player: "Folarin Balogun", team: "home" },
+      { minute: 73, player: "Mauricio", team: "away" },
+      { minute: 98, player: "Giovanni Reyna", team: "home" },
+    ],
+  },
 };
 
 const pad = (n) => String(n).padStart(2, "0");
