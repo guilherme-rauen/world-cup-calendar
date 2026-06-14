@@ -10,7 +10,7 @@ REFRESH-INTERVAL;VALUE=DURATION:PT12H
 X-PUBLISHED-TTL:PT12H
 BEGIN:VEVENT
 UID:wc2026-m1@worldcup2026.calendar
-DTSTAMP:20260613T101954Z
+DTSTAMP:20260614T062046Z
 DTSTART:20260611T190000Z
 DTEND:20260611T210000Z
 SUMMARY:🇲🇽 Mexico 2 x 0 🇿🇦 South Africa
@@ -21,7 +21,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:wc2026-m2@worldcup2026.calendar
-DTSTAMP:20260613T101954Z
+DTSTAMP:20260614T062046Z
 DTSTART:20260612T020000Z
 DTEND:20260612T040000Z
 SUMMARY:🇰🇷 South Korea 2 x 1 🇨🇿 Czechia
@@ -33,7 +33,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:wc2026-m3@worldcup2026.calendar
-DTSTAMP:20260613T101954Z
+DTSTAMP:20260614T062046Z
 DTSTART:20260612T190000Z
 DTEND:20260612T210000Z
 SUMMARY:🇨🇦 Canada 1 x 1 🇧🇦 Bosnia & Herzegovina
@@ -44,55 +44,59 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:wc2026-m4@worldcup2026.calendar
-DTSTAMP:20260613T101954Z
+DTSTAMP:20260614T062046Z
 DTSTART:20260613T010000Z
 DTEND:20260613T030000Z
 SUMMARY:🇺🇸 USA 4 x 1 🇵🇾 Paraguay
 LOCATION:SoFi Stadium\, Inglewood
 DESCRIPTION:Match 4 · FIFA World Cup 2026 · Group D\n\nGoals:\n⚽ 7' Dam
- ián Bobadilla 🇵🇾 (OG)\n⚽ 31' Folarin Balogun 🇺🇸\n⚽ 90+5' 
+ ián Bobadilla 🇵🇾 (OG)\n⚽ 31' Folarin Balogun 🇺🇸\n⚽ 45+5' 
  Folarin Balogun 🇺🇸\n⚽ 73' Mauricio 🇵🇾\n⚽ 90+8' Giovanni Re
  yna 🇺🇸
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:wc2026-m5@worldcup2026.calendar
-DTSTAMP:20260611T000000Z
+DTSTAMP:20260614T062046Z
 DTSTART:20260613T190000Z
 DTEND:20260613T210000Z
-SUMMARY:🇶🇦 Qatar vs 🇨🇭 Switzerland
+SUMMARY:🇶🇦 Qatar 1 x 1 🇨🇭 Switzerland
 LOCATION:Levi's Stadium\, Santa Clara
-DESCRIPTION:Match 5 · FIFA World Cup 2026 · Group B
+DESCRIPTION:Match 5 · FIFA World Cup 2026 · Group B\n\nGoals:\n⚽ 17' Br
+ eel Embolo 🇨🇭 (P)\n⚽ 90+4' Boualem Khoukhi 🇶🇦
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:wc2026-m6@worldcup2026.calendar
-DTSTAMP:20260611T000000Z
+DTSTAMP:20260614T062046Z
 DTSTART:20260613T220000Z
 DTEND:20260614T000000Z
-SUMMARY:🇧🇷 Brazil vs 🇲🇦 Morocco
+SUMMARY:🇧🇷 Brazil 1 x 1 🇲🇦 Morocco
 LOCATION:MetLife Stadium\, East Rutherford
-DESCRIPTION:Match 6 · FIFA World Cup 2026 · Group C
+DESCRIPTION:Match 6 · FIFA World Cup 2026 · Group C\n\nGoals:\n⚽ 21' Is
+ mael Saibari 🇲🇦\n⚽ 32' Vinícius Júnior 🇧🇷
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:wc2026-m7@worldcup2026.calendar
-DTSTAMP:20260611T000000Z
+DTSTAMP:20260614T062046Z
 DTSTART:20260614T010000Z
 DTEND:20260614T030000Z
-SUMMARY:🇭🇹 Haiti vs 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland
+SUMMARY:🇭🇹 Haiti 0 x 1 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland
 LOCATION:Gillette Stadium\, Foxborough
-DESCRIPTION:Match 7 · FIFA World Cup 2026 · Group C
+DESCRIPTION:Match 7 · FIFA World Cup 2026 · Group C\n\nGoals:\n⚽ 28' Jo
+ hn McGinn 🏴󠁧󠁢󠁳󠁣󠁴󠁿
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:wc2026-m8@worldcup2026.calendar
-DTSTAMP:20260611T000000Z
+DTSTAMP:20260614T062046Z
 DTSTART:20260614T040000Z
 DTEND:20260614T060000Z
-SUMMARY:🇦🇺 Australia vs 🇹🇷 Turkey
+SUMMARY:🇦🇺 Australia 2 x 0 🇹🇷 Turkey
 LOCATION:BC Place\, Vancouver
-DESCRIPTION:Match 8 · FIFA World Cup 2026 · Group D
+DESCRIPTION:Match 8 · FIFA World Cup 2026 · Group D\n\nGoals:\n⚽ 27' Ne
+ story Irankunda 🇦🇺\n⚽ 75' Connor Metcalfe 🇦🇺
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT

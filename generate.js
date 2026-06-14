@@ -894,7 +894,7 @@ const knockout = [
 ];
 
 // Match results — add an entry after each match day.
-// goals: { minute, player, team: "home" | "away", type?: "og" | "penalty" }
+// goals: { minute, player, team: "home" | "away", type?: "og" | "penalty", stoppage?: number }
 const results = {
   1: {
     home: 2,
@@ -927,9 +927,38 @@ const results = {
     goals: [
       { minute: 7, player: "Damián Bobadilla", team: "away", type: "og" },
       { minute: 31, player: "Folarin Balogun", team: "home" },
-      { minute: 95, player: "Folarin Balogun", team: "home" },
+      { minute: 45, stoppage: 5, player: "Folarin Balogun", team: "home" },
       { minute: 73, player: "Mauricio", team: "away" },
-      { minute: 98, player: "Giovanni Reyna", team: "home" },
+      { minute: 90, stoppage: 8, player: "Giovanni Reyna", team: "home" },
+    ],
+  },
+  5: {
+    home: 1,
+    away: 1,
+    goals: [
+      { minute: 17, player: "Breel Embolo", team: "away", type: "penalty" },
+      { minute: 90, stoppage: 4, player: "Boualem Khoukhi", team: "home" },
+    ],
+  },
+  6: {
+    home: 1,
+    away: 1,
+    goals: [
+      { minute: 21, player: "Ismael Saibari", team: "away" },
+      { minute: 32, player: "Vinícius Júnior", team: "home" },
+    ],
+  },
+  7: {
+    home: 0,
+    away: 1,
+    goals: [{ minute: 28, player: "John McGinn", team: "away" }],
+  },
+  8: {
+    home: 2,
+    away: 0,
+    goals: [
+      { minute: 27, player: "Nestory Irankunda", team: "home" },
+      { minute: 75, player: "Connor Metcalfe", team: "home" },
     ],
   },
 };
@@ -941,8 +970,8 @@ function icsNow() {
   return `${d.getUTCFullYear()}${pad(d.getUTCMonth() + 1)}${pad(d.getUTCDate())}T${pad(d.getUTCHours())}${pad(d.getUTCMinutes())}${pad(d.getUTCSeconds())}Z`;
 }
 
-function formatMinute(minute) {
-  if (minute > 90) return `90+${minute - 90}`;
+function formatMinute({ minute, stoppage }) {
+  if (stoppage != null) return `${minute}+${stoppage}`;
   return String(minute);
 }
 
@@ -965,7 +994,7 @@ function formatGoalSuffix(goal) {
 function formatGoalLine(goal, home, away) {
   const teamName = goal.team === "home" ? home : away;
   const flag = FLAGS[teamName] || teamName;
-  return `⚽ ${formatMinute(goal.minute)}' ${goal.player} ${flag}${formatGoalSuffix(goal)}`;
+  return `⚽ ${formatMinute(goal)}' ${goal.player} ${flag}${formatGoalSuffix(goal)}`;
 }
 
 function appendGoals(desc, goals, home, away) {
