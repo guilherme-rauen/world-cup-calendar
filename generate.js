@@ -961,6 +961,47 @@ const results = {
       { minute: 75, player: "Connor Metcalfe", team: "home" },
     ],
   },
+  9: {
+    home: 7,
+    away: 1,
+    goals: [
+      { minute: 6, player: "Felix Nmecha", team: "home" },
+      { minute: 21, player: "Livano Comenencia", team: "away" },
+      { minute: 38, player: "Nico Schlotterbeck", team: "home" },
+      { minute: 45, stoppage: 5, player: "Kai Havertz", team: "home", type: "penalty" },
+      { minute: 47, player: "Jamal Musiala", team: "home" },
+      { minute: 68, player: "Nathaniel Brown", team: "home" },
+      { minute: 78, player: "Deniz Undav", team: "home" },
+      { minute: 88, player: "Kai Havertz", team: "home" },
+    ],
+  },
+  10: {
+    home: 2,
+    away: 2,
+    goals: [
+      { minute: 51, player: "Virgil van Dijk", team: "home" },
+      { minute: 57, player: "Keito Nakamura", team: "away" },
+      { minute: 64, player: "Crysencio Summerville", team: "home" },
+      { minute: 89, player: "Daichi Kamada", team: "away" },
+    ],
+  },
+  11: {
+    home: 1,
+    away: 0,
+    goals: [{ minute: 90, player: "Amad Diallo", team: "home" }],
+  },
+  12: {
+    home: 5,
+    away: 1,
+    goals: [
+      { minute: 7, player: "Yasin Ayari", team: "home" },
+      { minute: 30, player: "Alexander Isak", team: "home" },
+      { minute: 43, player: "Omar Rekik", team: "away" },
+      { minute: 59, player: "Viktor Gyökeres", team: "home" },
+      { minute: 84, player: "Mattias Svanberg", team: "home" },
+      { minute: 90, stoppage: 6, player: "Yasin Ayari", team: "home" },
+    ],
+  },
 };
 
 const pad = (n) => String(n).padStart(2, "0");
