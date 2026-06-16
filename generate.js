@@ -1002,6 +1002,37 @@ const results = {
       { minute: 90, stoppage: 6, player: "Yasin Ayari", team: "home" },
     ],
   },
+  13: {
+    home: 0,
+    away: 0,
+    goals: [],
+  },
+  14: {
+    home: 1,
+    away: 1,
+    goals: [
+      { minute: 20, player: "Emam Ashour", team: "away" },
+      { minute: 66, player: "Mohamed Hany", team: "away", type: "og" },
+    ],
+  },
+  15: {
+    home: 1,
+    away: 1,
+    goals: [
+      { minute: 41, player: "Abdulelah Al-Amri", team: "home" },
+      { minute: 80, player: "Maxi Araújo", team: "away" },
+    ],
+  },
+  16: {
+    home: 2,
+    away: 2,
+    goals: [
+      { minute: 7, player: "Elijah Just", team: "away" },
+      { minute: 32, player: "Ramin Rezaeian", team: "home" },
+      { minute: 54, player: "Elijah Just", team: "away" },
+      { minute: 64, player: "Mohammad Mohebi", team: "home" },
+    ],
+  },
 };
 
 const pad = (n) => String(n).padStart(2, "0");
