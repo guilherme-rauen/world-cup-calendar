@@ -1033,6 +1033,46 @@ const results = {
       { minute: 64, player: "Mohammad Mohebi", team: "home" },
     ],
   },
+  17: {
+    home: 3,
+    away: 1,
+    goals: [
+      { minute: 66, player: "Kylian Mbappé", team: "home" },
+      { minute: 82, player: "Bradley Barcola", team: "home" },
+      { minute: 90, stoppage: 5, player: "Ibrahim Mbaye", team: "away" },
+      { minute: 90, stoppage: 6, player: "Kylian Mbappé", team: "home" },
+    ],
+  },
+  18: {
+    home: 1,
+    away: 4,
+    goals: [
+      { minute: 29, player: "Erling Haaland", team: "away" },
+      { minute: 39, player: "Aymen Hussein", team: "home" },
+      { minute: 43, player: "Erling Haaland", team: "away" },
+      { minute: 76, player: "Leo Østigård", team: "away" },
+      { minute: 90, stoppage: 6, player: "Aymen Hussein", team: "home", type: "og" },
+    ],
+  },
+  19: {
+    home: 3,
+    away: 0,
+    goals: [
+      { minute: 17, player: "Lionel Messi", team: "home" },
+      { minute: 60, player: "Lionel Messi", team: "home" },
+      { minute: 76, player: "Lionel Messi", team: "home" },
+    ],
+  },
+  20: {
+    home: 3,
+    away: 1,
+    goals: [
+      { minute: 20, player: "Romano Schmid", team: "home" },
+      { minute: 50, player: "Ali Olwan", team: "away" },
+      { minute: 76, player: "Yazan Al Arab", team: "away", type: "og" },
+      { minute: 90, stoppage: 12, player: "Marko Arnautovic", team: "home", type: "penalty" },
+    ],
+  },
 };
 
 const pad = (n) => String(n).padStart(2, "0");
