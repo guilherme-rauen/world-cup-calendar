@@ -1073,6 +1073,41 @@ const results = {
       { minute: 90, stoppage: 12, player: "Marko Arnautovic", team: "home", type: "penalty" },
     ],
   },
+  21: {
+    home: 1,
+    away: 1,
+    goals: [
+      { minute: 6, player: "João Neves", team: "home" },
+      { minute: 45, stoppage: 5, player: "Yoane Wissa", team: "away" },
+    ],
+  },
+  22: {
+    home: 4,
+    away: 2,
+    goals: [
+      { minute: 12, player: "Harry Kane", team: "home", type: "penalty" },
+      { minute: 36, player: "Martin Baturina", team: "away" },
+      { minute: 42, player: "Harry Kane", team: "home" },
+      { minute: 45, stoppage: 5, player: "Petar Musa", team: "away" },
+      { minute: 47, player: "Jude Bellingham", team: "home" },
+      { minute: 85, player: "Marcus Rashford", team: "home" },
+    ],
+  },
+  23: {
+    home: 1,
+    away: 0,
+    goals: [{ minute: 90, stoppage: 5, player: "Caleb Yirenkyi", team: "home" }],
+  },
+  24: {
+    home: 1,
+    away: 3,
+    goals: [
+      { minute: 40, player: "Daniel Muñoz", team: "away" },
+      { minute: 60, player: "Abbosbek Fayzullaev", team: "home" },
+      { minute: 65, player: "Luis Díaz", team: "away" },
+      { minute: 90, stoppage: 9, player: "Jaminton Campaz", team: "away" },
+    ],
+  },
 };
 
 const pad = (n) => String(n).padStart(2, "0");
