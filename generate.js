@@ -893,6 +893,12 @@ const knockout = [
   ],
 ];
 
+// Secured group finishes for knockout slot resolution.
+// Key: "1A" = Group A winners, "2B" = Group B runners-up, etc.
+const qualified = {
+  "1A": "Mexico",
+};
+
 // Match results — add an entry after each match day.
 // goals: { minute, player, team: "home" | "away", type?: "og" | "penalty", stoppage?: number }
 const results = {
@@ -1108,6 +1114,42 @@ const results = {
       { minute: 90, stoppage: 9, player: "Jaminton Campaz", team: "away" },
     ],
   },
+  25: {
+    home: 1,
+    away: 1,
+    goals: [
+      { minute: 6, player: "Michal Sadílek", team: "home" },
+      { minute: 83, player: "Teboho Mokoena", team: "away", type: "penalty" },
+    ],
+  },
+  26: {
+    home: 4,
+    away: 1,
+    goals: [
+      { minute: 71, player: "Johan Manzambi", team: "home" },
+      { minute: 84, player: "Ruben Vargas", team: "home" },
+      { minute: 90, player: "Johan Manzambi", team: "home" },
+      { minute: 90, stoppage: 3, player: "Ermin Mahmic", team: "away" },
+      { minute: 90, stoppage: 7, player: "Granit Xhaka", team: "home", type: "penalty" },
+    ],
+  },
+  27: {
+    home: 6,
+    away: 0,
+    goals: [
+      { minute: 16, player: "Cyle Larin", team: "home" },
+      { minute: 29, player: "Jonathan David", team: "home" },
+      { minute: 45, stoppage: 3, player: "Jonathan David", team: "home" },
+      { minute: 64, player: "Nathan Saliba", team: "home" },
+      { minute: 75, player: "Mohamed Manai", team: "away", type: "og" },
+      { minute: 90, stoppage: 2, player: "Jonathan David", team: "home" },
+    ],
+  },
+  28: {
+    home: 1,
+    away: 0,
+    goals: [{ minute: 50, player: "Luis Romo", team: "home" }],
+  },
 };
 
 const pad = (n) => String(n).padStart(2, "0");
@@ -1125,6 +1167,25 @@ function formatMinute({ minute, stoppage }) {
 function formatMatchTitle(home, away, fh, fa, result) {
   if (!result) return `${fh} ${home} vs ${fa} ${away}`;
   return `${fh} ${home} ${result.home} x ${result.away} ${fa} ${away}`;
+}
+
+function resolveKnockoutSlot(slot) {
+  const winner = slot.match(/^Winner Group ([A-L])$/);
+  if (winner) {
+    const team = qualified[`1${winner[1]}`];
+    if (team) return { name: team, flag: FLAGS[team] || "" };
+  }
+  const runnerUp = slot.match(/^Runner-up Group ([A-L])$/);
+  if (runnerUp) {
+    const team = qualified[`2${runnerUp[1]}`];
+    if (team) return { name: team, flag: FLAGS[team] || "" };
+  }
+  return { name: slot, flag: "" };
+}
+
+function formatKnockoutParticipant(slot) {
+  const { name, flag } = resolveKnockoutSlot(slot);
+  return flag ? `${flag} ${name}` : name;
 }
 
 function formatMatchDescription(n, phase, prefix) {
@@ -1260,12 +1321,16 @@ for (const [
   venue,
   city,
 ] of knockout) {
+  const homeTeam = resolveKnockoutSlot(home);
+  const awayTeam = resolveKnockoutSlot(away);
+  const homeTitle = formatKnockoutParticipant(home);
+  const awayTitle = formatKnockoutParticipant(away);
   const result = results[n];
   const title = result
-    ? `${home} ${result.home} x ${result.away} ${away} — ${round}`
-    : `${home} vs ${away} — ${round}`;
+    ? `${homeTitle} ${result.home} x ${result.away} ${awayTitle} — ${round}`
+    : `${homeTitle} vs ${awayTitle} — ${round}`;
   let desc = formatMatchDescription(n, round);
-  desc = appendGoals(desc, result?.goals, home, away);
+  desc = appendGoals(desc, result?.goals, homeTeam.name, awayTeam.name);
   events.push(
     vevent({
       n,
