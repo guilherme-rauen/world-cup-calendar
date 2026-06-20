@@ -893,10 +893,17 @@ const knockout = [
   ],
 ];
 
+const knockoutFixtures = Object.fromEntries(
+  knockout.map(([n, , , , , home, away]) => [n, { home, away }]),
+);
+
 // Secured group finishes for knockout slot resolution.
 // Key: "1A" = Group A winners, "2B" = Group B runners-up, etc.
+// When a KO match has both teams known, downstream "Winner Match N" slots
+// show "🇲🇽 Mexico | 🇺🇸 USA" until the result is in; then the winner only.
 const qualified = {
   "1A": "Mexico",
+  "1D": "USA",
 };
 
 // Match results — add an entry after each match day.
@@ -1150,6 +1157,28 @@ const results = {
     away: 0,
     goals: [{ minute: 50, player: "Luis Romo", team: "home" }],
   },
+  29: {
+    home: 2,
+    away: 0,
+    goals: [
+      { minute: 11, player: "Cameron Burgess", team: "away", type: "og" },
+      { minute: 43, player: "Alex Freeman", team: "home" },
+    ],
+  },
+  30: {
+    home: 0,
+    away: 1,
+    goals: [{ minute: 2, player: "Ismael Saibari", team: "away" }],
+  },
+  31: {
+    home: 3,
+    away: 0,
+    goals: [
+      { minute: 23, player: "Matheus Cunha", team: "home" },
+      { minute: 36, player: "Matheus Cunha", team: "home" },
+      { minute: 45, stoppage: 3, player: "Vinícius Júnior", team: "home" },
+    ],
+  },
 };
 
 const pad = (n) => String(n).padStart(2, "0");
@@ -1169,7 +1198,39 @@ function formatMatchTitle(home, away, fh, fa, result) {
   return `${fh} ${home} ${result.home} x ${result.away} ${fa} ${away}`;
 }
 
-function resolveKnockoutSlot(slot) {
+function resolveKnockoutSlot(slot, visiting = new Set()) {
+  const winnerMatch = slot.match(/^Winner Match (\d+)$/);
+  if (winnerMatch) {
+    const matchN = Number(winnerMatch[1]);
+    if (visiting.has(matchN)) return { name: slot, flag: "" };
+    visiting.add(matchN);
+
+    const fixture = knockoutFixtures[matchN];
+    if (!fixture) {
+      visiting.delete(matchN);
+      return { name: slot, flag: "" };
+    }
+
+    const home = resolveKnockoutSlot(fixture.home, visiting);
+    const away = resolveKnockoutSlot(fixture.away, visiting);
+    visiting.delete(matchN);
+
+    const result = results[matchN];
+    if (result) {
+      if (result.home > result.away && home.flag) return home;
+      if (result.away > result.home && away.flag) return away;
+    }
+
+    if (home.flag && away.flag) {
+      return {
+        name: `${home.flag} ${home.name} | ${away.flag} ${away.name}`,
+        flag: "",
+      };
+    }
+
+    return { name: slot, flag: "" };
+  }
+
   const winner = slot.match(/^Winner Group ([A-L])$/);
   if (winner) {
     const team = qualified[`1${winner[1]}`];
