@@ -904,6 +904,7 @@ const knockoutFixtures = Object.fromEntries(
 const qualified = {
   "1A": "Mexico",
   "1D": "USA",
+  "1E": "Germany",
 };
 
 // Match results — add an entry after each match day.
@@ -1177,6 +1178,47 @@ const results = {
       { minute: 23, player: "Matheus Cunha", team: "home" },
       { minute: 36, player: "Matheus Cunha", team: "home" },
       { minute: 45, stoppage: 3, player: "Vinícius Júnior", team: "home" },
+    ],
+  },
+  32: {
+    home: 0,
+    away: 1,
+    goals: [{ minute: 2, player: "Matías Galarza", team: "away" }],
+  },
+  33: {
+    home: 5,
+    away: 1,
+    goals: [
+      { minute: 5, player: "Brian Brobbey", team: "home" },
+      { minute: 17, player: "Brian Brobbey", team: "home" },
+      { minute: 47, player: "Cody Gakpo", team: "home" },
+      { minute: 54, player: "Cody Gakpo", team: "home" },
+      { minute: 59, player: "Anthony Elanga", team: "away" },
+      { minute: 89, player: "Crysencio Summerville", team: "home" },
+    ],
+  },
+  34: {
+    home: 2,
+    away: 1,
+    goals: [
+      { minute: 30, player: "Franck Kessie", team: "away" },
+      { minute: 68, player: "Deniz Undav", team: "home" },
+      { minute: 90, stoppage: 4, player: "Deniz Undav", team: "home" },
+    ],
+  },
+  35: {
+    home: 0,
+    away: 0,
+    goals: [],
+  },
+  36: {
+    home: 0,
+    away: 4,
+    goals: [
+      { minute: 4, player: "Daichi Kamada", team: "away" },
+      { minute: 31, player: "Ayase Ueda", team: "away" },
+      { minute: 69, player: "Junya Ito", team: "away" },
+      { minute: 83, player: "Ayase Ueda", team: "away" },
     ],
   },
 };
