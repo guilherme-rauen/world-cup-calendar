@@ -903,8 +903,16 @@ const knockoutFixtures = Object.fromEntries(
 // show "🇲🇽 Mexico | 🇺🇸 USA" until the result is in; then the winner only.
 const qualified = {
   "1A": "Mexico",
+  "1B": "Switzerland",
+  "1C": "Brazil",
   "1D": "USA",
   "1E": "Germany",
+  "1F": "Netherlands",
+  "1G": "Belgium",
+  "1H": "Spain",
+  "1I": "France",
+  "2C": "Morocco",
+  "2E": "Ivory Coast",
 };
 
 // Match results — add an entry after each match day.
@@ -1219,6 +1227,261 @@ const results = {
       { minute: 31, player: "Ayase Ueda", team: "away" },
       { minute: 69, player: "Junya Ito", team: "away" },
       { minute: 83, player: "Ayase Ueda", team: "away" },
+    ],
+  },
+  37: {
+    home: 4,
+    away: 0,
+    goals: [
+      { minute: 10, player: "Lamine Yamal", team: "home" },
+      { minute: 21, player: "Mikel Oyarzabal", team: "home" },
+      { minute: 24, player: "Mikel Oyarzabal", team: "home" },
+      { minute: 49, player: "Hassan Altambakti", team: "away", type: "og" },
+    ],
+  },
+  38: {
+    home: 0,
+    away: 0,
+    goals: [],
+  },
+  39: {
+    home: 2,
+    away: 2,
+    goals: [
+      { minute: 21, player: "Kevin Pina", team: "away" },
+      { minute: 44, player: "Maxi Araújo", team: "home" },
+      { minute: 45, stoppage: 6, player: "Agustin Canobbio", team: "home" },
+      { minute: 61, player: "Helio Varela", team: "away" },
+    ],
+  },
+  40: {
+    home: 1,
+    away: 3,
+    goals: [
+      { minute: 15, player: "Finn Surman", team: "home" },
+      { minute: 58, player: "Mostafa Zico", team: "away" },
+      { minute: 67, player: "Mohamed Salah", team: "away" },
+      { minute: 82, player: "Trézéguet", team: "away" },
+    ],
+  },
+  41: {
+    home: 2,
+    away: 0,
+    goals: [
+      { minute: 38, player: "Lionel Messi", team: "home" },
+      { minute: 90, stoppage: 5, player: "Lionel Messi", team: "home" },
+    ],
+  },
+  42: {
+    home: 3,
+    away: 0,
+    goals: [
+      { minute: 14, player: "Kylian Mbappé", team: "home" },
+      { minute: 54, player: "Kylian Mbappé", team: "home" },
+      { minute: 66, player: "Ousmane Dembélé", team: "home" },
+    ],
+  },
+  43: {
+    home: 3,
+    away: 2,
+    goals: [
+      { minute: 43, player: "Marcus Pedersen", team: "home" },
+      { minute: 48, player: "Erling Haaland", team: "home" },
+      { minute: 53, player: "Ismaïla Sarr", team: "away" },
+      { minute: 58, player: "Erling Haaland", team: "home" },
+      { minute: 90, stoppage: 3, player: "Ismaïla Sarr", team: "away" },
+    ],
+  },
+  44: {
+    home: 1,
+    away: 2,
+    goals: [
+      { minute: 36, player: "Nizar Al Rashdan", team: "home" },
+      { minute: 69, player: "Nadhir Benbouali", team: "away" },
+      { minute: 82, player: "Amine Gouiri", team: "away" },
+    ],
+  },
+  45: {
+    home: 5,
+    away: 0,
+    goals: [
+      { minute: 6, player: "Cristiano Ronaldo", team: "home" },
+      { minute: 17, player: "Nuno Mendes", team: "home" },
+      { minute: 39, player: "Cristiano Ronaldo", team: "home" },
+      { minute: 60, player: "Abduvokhid Nematov", team: "away", type: "og" },
+      { minute: 87, player: "Rafael Leão", team: "home" },
+    ],
+  },
+  46: {
+    home: 0,
+    away: 0,
+    goals: [],
+  },
+  47: {
+    home: 0,
+    away: 1,
+    goals: [{ minute: 54, player: "Ante Budimir", team: "away" }],
+  },
+  48: {
+    home: 1,
+    away: 0,
+    goals: [{ minute: 76, player: "Daniel Muñoz", team: "home" }],
+  },
+  49: {
+    home: 2,
+    away: 1,
+    goals: [
+      { minute: 46, player: "Rubén Vargas", team: "home" },
+      { minute: 57, player: "Johan Manzambi", team: "home" },
+      { minute: 76, player: "Promise David", team: "away" },
+    ],
+  },
+  50: {
+    home: 3,
+    away: 1,
+    goals: [
+      { minute: 29, player: "Kerim Alajbegovic", team: "home" },
+      { minute: 34, player: "Mahmoud Abunada", team: "away", type: "og" },
+      { minute: 42, player: "Hassan Al Haydos", team: "away" },
+      { minute: 80, player: "Ermin Mahmic", team: "home" },
+    ],
+  },
+  51: {
+    home: 0,
+    away: 3,
+    goals: [
+      { minute: 7, player: "Vinícius Júnior", team: "away" },
+      { minute: 45, stoppage: 3, player: "Vinícius Júnior", team: "away" },
+      { minute: 60, player: "Matheus Cunha", team: "away" },
+    ],
+  },
+  52: {
+    home: 4,
+    away: 2,
+    goals: [
+      { minute: 10, player: "Yassine Bounou", team: "home", type: "og" },
+      { minute: 39, player: "Achraf Hakimi", team: "home" },
+      { minute: 43, player: "Wilson Isidor", team: "away" },
+      { minute: 45, stoppage: 1, player: "Ismael Saibari", team: "home" },
+      { minute: 78, player: "Soufiane Rahimi", team: "home" },
+      { minute: 89, player: "Gessime Yassine", team: "home" },
+    ],
+  },
+  53: {
+    home: 0,
+    away: 3,
+    goals: [
+      { minute: 55, player: "Mateo Chávez", team: "away" },
+      { minute: 61, player: "Julián Quiñones", team: "away" },
+      { minute: 90, stoppage: 4, player: "Álvaro Fidalgo", team: "away" },
+    ],
+  },
+  54: {
+    home: 1,
+    away: 0,
+    goals: [{ minute: 63, player: "Thapelo Maseko", team: "home" }],
+  },
+  55: {
+    home: 0,
+    away: 2,
+    goals: [
+      { minute: 7, player: "Nicolas Pépé", team: "away" },
+      { minute: 64, player: "Nicolas Pépé", team: "away" },
+    ],
+  },
+  56: {
+    home: 2,
+    away: 1,
+    goals: [
+      { minute: 2, player: "Leroy Sané", team: "away" },
+      { minute: 9, player: "Nilson Angulo", team: "home" },
+      { minute: 77, player: "Gonzalo Plata", team: "home" },
+    ],
+  },
+  57: {
+    home: 1,
+    away: 1,
+    goals: [
+      { minute: 56, player: "Daizen Maeda", team: "home" },
+      { minute: 62, player: "Anthony Elanga", team: "away" },
+    ],
+  },
+  58: {
+    home: 1,
+    away: 3,
+    goals: [
+      { minute: 3, player: "Ellyes Skhiri", team: "home", type: "og" },
+      { minute: 7, player: "Brian Brobbey", team: "away" },
+      { minute: 54, player: "Hazem Mastouri", team: "home" },
+      { minute: 62, player: "Jan Paul van Hecke", team: "away" },
+    ],
+  },
+  59: {
+    home: 3,
+    away: 2,
+    goals: [
+      { minute: 3, player: "Auston Trusty", team: "away" },
+      { minute: 10, player: "Arda Güler", team: "home" },
+      { minute: 31, player: "Baris Alper Yilmaz", team: "home" },
+      { minute: 49, player: "Sebastian Berhalter", team: "away" },
+      { minute: 90, stoppage: 8, player: "Kaan Ayhan", team: "home" },
+    ],
+  },
+  60: {
+    home: 0,
+    away: 0,
+    goals: [],
+  },
+  61: {
+    home: 1,
+    away: 4,
+    goals: [
+      { minute: 7, player: "Ousmane Dembélé", team: "away" },
+      { minute: 20, player: "Ousmane Dembélé", team: "away" },
+      { minute: 21, player: "Thelo Aasgaard", team: "home" },
+      { minute: 32, player: "Ousmane Dembélé", team: "away" },
+      { minute: 90, stoppage: 4, player: "Désiré Doué", team: "away" },
+    ],
+  },
+  62: {
+    home: 5,
+    away: 0,
+    goals: [
+      { minute: 4, player: "Habib Diarra", team: "home" },
+      { minute: 56, player: "Ismaïla Sarr", team: "home" },
+      { minute: 59, player: "Pape Gueye", team: "home" },
+      { minute: 71, player: "Pape Gueye", team: "home" },
+      { minute: 82, player: "Iliman Ndiaye", team: "home" },
+    ],
+  },
+  63: {
+    home: 0,
+    away: 0,
+    goals: [],
+  },
+  64: {
+    home: 0,
+    away: 1,
+    goals: [{ minute: 42, player: "Álex Baena", team: "away" }],
+  },
+  65: {
+    home: 1,
+    away: 1,
+    goals: [
+      { minute: 5, player: "Mahmoud Saber", team: "home" },
+      { minute: 14, player: "Ramin Rezaeian", team: "away" },
+    ],
+  },
+  66: {
+    home: 1,
+    away: 5,
+    goals: [
+      { minute: 28, player: "Leandro Trossard", team: "away" },
+      { minute: 50, player: "Leandro Trossard", team: "away" },
+      { minute: 66, player: "Kevin De Bruyne", team: "away" },
+      { minute: 84, player: "Elijah Just", team: "home" },
+      { minute: 86, player: "Romelu Lukaku", team: "away" },
+      { minute: 90, stoppage: 4, player: "Alexis Saelemaekers", team: "away" },
     ],
   },
 };
