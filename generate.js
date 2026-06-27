@@ -4,6 +4,8 @@
 // let Date normalize day/month rollovers. Events stored in UTC (Z) so every
 // subscriber's phone localizes automatically.
 
+const { ANNEX_C_WINNERS, ANNEX_C_ROWS } = require("./annex-c");
+
 const FLAGS = {
   Mexico: "🇲🇽",
   "South Africa": "🇿🇦",
@@ -897,10 +899,9 @@ const knockoutFixtures = Object.fromEntries(
   knockout.map(([n, , , , , home, away]) => [n, { home, away }]),
 );
 
-// Secured group finishes for knockout slot resolution.
+// Secured group finishes for knockout slot resolution (manual early locks).
+// Completed groups are also derived from results in getEffectiveQualified().
 // Key: "1A" = Group A winners, "2B" = Group B runners-up, etc.
-// When a KO match has both teams known, downstream "Winner Match N" slots
-// show "🇲🇽 Mexico | 🇺🇸 USA" until the result is in; then the winner only.
 const qualified = {
   "1A": "Mexico",
   "1B": "Switzerland",
@@ -911,8 +912,6 @@ const qualified = {
   "1G": "Belgium",
   "1H": "Spain",
   "1I": "France",
-  "2C": "Morocco",
-  "2E": "Ivory Coast",
 };
 
 // Match results — add an entry after each match day.
@@ -1486,6 +1485,211 @@ const results = {
   },
 };
 
+// Maps each "Best Third (…)" pool to the group-winner letter that slot faces (FIFA R32 schedule).
+const BEST_THIRD_POOL_TO_WINNER = {
+  "A/B/C/D/F": "E",
+  "C/D/F/G/H": "I",
+  "C/E/F/H/I": "A",
+  "E/H/I/J/K": "L",
+  "B/E/F/I/J": "D",
+  "A/E/H/I/J": "G",
+  "E/F/G/I/J": "B",
+  "D/E/I/J/L": "K",
+};
+
+const THIRD_PLACE_LOOKUP = new Map();
+for (const letters of ANNEX_C_ROWS) {
+  const byWinner = {};
+  for (let j = 0; j < ANNEX_C_WINNERS.length; j++) {
+    byWinner[ANNEX_C_WINNERS[j]] = letters[j];
+  }
+  THIRD_PLACE_LOOKUP.set(letters.split("").sort().join(""), byWinner);
+}
+
+function buildGroupData() {
+  const teamsByGroup = {};
+  const playedByGroup = {};
+  for (const [n, , , , , home, away, group] of groupStage) {
+    (teamsByGroup[group] ||= new Set()).add(home);
+    teamsByGroup[group].add(away);
+    const result = results[n];
+    if (!result) continue;
+    (playedByGroup[group] ||= []).push({
+      home,
+      away,
+      gh: result.home,
+      ga: result.away,
+    });
+  }
+  return { teamsByGroup, playedByGroup };
+}
+
+function isGroupComplete(group, playedByGroup, teamsByGroup) {
+  const n = teamsByGroup[group].size;
+  return (playedByGroup[group]?.length || 0) === (n * (n - 1)) / 2;
+}
+
+function tierBy(rows, key) {
+  const sorted = rows.slice().sort((x, y) => key(y) - key(x));
+  const tiers = [];
+  for (const r of sorted) {
+    const last = tiers[tiers.length - 1];
+    if (last && key(last[0]) === key(r)) last.push(r);
+    else tiers.push([r]);
+  }
+  return tiers;
+}
+
+function miniLeagueTable(teams, played) {
+  const codes = new Set(teams.map((t) => t.team));
+  const table = new Map(
+    teams.map((t) => [t.team, { pts: 0, gf: 0, ga: 0, gd: 0 }]),
+  );
+  for (const { home, away, gh, ga } of played) {
+    if (!codes.has(home) || !codes.has(away)) continue;
+    const H = table.get(home);
+    const A = table.get(away);
+    H.gf += gh;
+    H.ga += ga;
+    A.gf += ga;
+    A.ga += gh;
+    if (gh > ga) H.pts += 3;
+    else if (gh < ga) A.pts += 3;
+    else {
+      H.pts += 1;
+      A.pts += 1;
+    }
+  }
+  for (const row of table.values()) row.gd = row.gf - row.ga;
+  return table;
+}
+
+function sameMini(a, b) {
+  return a.pts === b.pts && a.gd === b.gd && a.gf === b.gf;
+}
+
+function fallback(teams) {
+  return teams
+    .slice()
+    .sort((x, y) => y.gd - x.gd || y.gf - x.gf || x.team.localeCompare(y.team));
+}
+
+function resolveTie(teams, played) {
+  const mini = miniLeagueTable(teams, played);
+  const ranked = teams.slice().sort((x, y) => {
+    const mx = mini.get(x.team);
+    const my = mini.get(y.team);
+    return my.pts - mx.pts || my.gd - mx.gd || my.gf - mx.gf;
+  });
+  const runs = [];
+  for (const r of ranked) {
+    const last = runs[runs.length - 1];
+    if (last && sameMini(mini.get(last[0].team), mini.get(r.team))) last.push(r);
+    else runs.push([r]);
+  }
+  if (runs.length === 1) return fallback(teams);
+  const out = [];
+  for (const run of runs) {
+    out.push(...(run.length === 1 ? run : resolveTie(run, played)));
+  }
+  return out;
+}
+
+function rankStandings(rows, played) {
+  const out = [];
+  for (const tier of tierBy(rows, (r) => r.pts)) {
+    out.push(...(tier.length === 1 ? tier : resolveTie(tier, played)));
+  }
+  return out;
+}
+
+function rankGroup(group, playedByGroup, teamsByGroup) {
+  const rows = {};
+  for (const team of teamsByGroup[group]) {
+    rows[team] = { team, pts: 0, gf: 0, ga: 0, gd: 0, played: 0 };
+  }
+  for (const { home, away, gh, ga } of playedByGroup[group] || []) {
+    const H = rows[home];
+    const A = rows[away];
+    H.gf += gh;
+    H.ga += ga;
+    A.gf += ga;
+    A.ga += gh;
+    H.played++;
+    A.played++;
+    if (gh > ga) H.pts += 3;
+    else if (gh < ga) A.pts += 3;
+    else {
+      H.pts += 1;
+      A.pts += 1;
+    }
+  }
+  const arr = Object.values(rows);
+  for (const r of arr) r.gd = r.gf - r.ga;
+  return rankStandings(arr, playedByGroup[group] || []);
+}
+
+function getEffectiveQualified() {
+  const { teamsByGroup, playedByGroup } = buildGroupData();
+  const merged = { ...qualified };
+  for (const group of Object.keys(teamsByGroup).sort()) {
+    if (!isGroupComplete(group, playedByGroup, teamsByGroup)) continue;
+    const ranked = rankGroup(group, playedByGroup, teamsByGroup);
+    if (ranked[0]) merged[`1${group}`] = ranked[0].team;
+    if (ranked[1]) merged[`2${group}`] = ranked[1].team;
+  }
+  return merged;
+}
+
+function pickBestThirds(thirds) {
+  return thirds
+    .slice()
+    .sort(
+      (x, y) =>
+        y.row.pts - x.row.pts ||
+        y.row.gd - x.row.gd ||
+        y.row.gf - x.row.gf ||
+        x.team.localeCompare(y.team),
+    )
+    .slice(0, 8);
+}
+
+function getThirdByWinner() {
+  const { teamsByGroup, playedByGroup } = buildGroupData();
+  if (
+    !Object.keys(teamsByGroup).every((g) =>
+      isGroupComplete(g, playedByGroup, teamsByGroup),
+    )
+  ) {
+    return {};
+  }
+
+  const thirds = [];
+  for (const group of Object.keys(teamsByGroup).sort()) {
+    const ranked = rankGroup(group, playedByGroup, teamsByGroup);
+    if (ranked[2]) thirds.push({ group, team: ranked[2].team, row: ranked[2] });
+  }
+
+  const best = pickBestThirds(thirds);
+  const combo = best
+    .map((t) => t.group)
+    .sort()
+    .join("");
+  const byWinner = THIRD_PLACE_LOOKUP.get(combo);
+  if (!byWinner) return {};
+
+  const thirdByGroup = Object.fromEntries(thirds.map((t) => [t.group, t.team]));
+  const thirdByWinner = {};
+  for (const w of ANNEX_C_WINNERS) {
+    const g = byWinner[w];
+    if (g && thirdByGroup[g]) thirdByWinner[w] = thirdByGroup[g];
+  }
+  return thirdByWinner;
+}
+
+const effectiveQualified = getEffectiveQualified();
+const thirdByWinner = getThirdByWinner();
+
 const pad = (n) => String(n).padStart(2, "0");
 
 function icsNow() {
@@ -1538,12 +1742,18 @@ function resolveKnockoutSlot(slot, visiting = new Set()) {
 
   const winner = slot.match(/^Winner Group ([A-L])$/);
   if (winner) {
-    const team = qualified[`1${winner[1]}`];
+    const team = effectiveQualified[`1${winner[1]}`];
     if (team) return { name: team, flag: FLAGS[team] || "" };
   }
   const runnerUp = slot.match(/^Runner-up Group ([A-L])$/);
   if (runnerUp) {
-    const team = qualified[`2${runnerUp[1]}`];
+    const team = effectiveQualified[`2${runnerUp[1]}`];
+    if (team) return { name: team, flag: FLAGS[team] || "" };
+  }
+  const bestThird = slot.match(/^Best Third \(([^)]+)\)$/);
+  if (bestThird) {
+    const winnerLetter = BEST_THIRD_POOL_TO_WINNER[bestThird[1]];
+    const team = winnerLetter && thirdByWinner[winnerLetter];
     if (team) return { name: team, flag: FLAGS[team] || "" };
   }
   return { name: slot, flag: "" };
