@@ -1483,6 +1483,60 @@ const results = {
       { minute: 90, stoppage: 4, player: "Alexis Saelemaekers", team: "away" },
     ],
   },
+  67: {
+    home: 0,
+    away: 2,
+    goals: [
+      { minute: 62, player: "Jude Bellingham", team: "away" },
+      { minute: 67, player: "Harry Kane", team: "away" },
+    ],
+  },
+  68: {
+    home: 2,
+    away: 1,
+    goals: [
+      { minute: 31, player: "Petar Sucic", team: "home" },
+      { minute: 73, player: "Derrick Luckassen", team: "away", type: "og" },
+      { minute: 83, player: "Nikola Vlasic", team: "home" },
+    ],
+  },
+  69: {
+    home: 0,
+    away: 0,
+    goals: [],
+  },
+  70: {
+    home: 3,
+    away: 1,
+    goals: [
+      { minute: 10, player: "Eldor Shomurodov", team: "away" },
+      { minute: 68, player: "Yoane Wissa", team: "home", type: "penalty" },
+      { minute: 78, player: "Fiston Mayele", team: "home" },
+      { minute: 90, stoppage: 1, player: "Yoane Wissa", team: "home" },
+    ],
+  },
+  71: {
+    home: 3,
+    away: 3,
+    goals: [
+      { minute: 28, player: "Marko Arnautovic", team: "away" },
+      { minute: 45, player: "Rafik Belghali", team: "home" },
+      { minute: 55, player: "Marcel Sabitzer", team: "away" },
+      { minute: 60, player: "Riyad Mahrez", team: "home" },
+      { minute: 90, stoppage: 3, player: "Riyad Mahrez", team: "home" },
+      { minute: 90, stoppage: 6, player: "Sasa Kalajdzic", team: "away" },
+    ],
+  },
+  72: {
+    home: 1,
+    away: 3,
+    goals: [
+      { minute: 19, player: "Giovani Lo Celso", team: "away" },
+      { minute: 31, player: "Lautaro Martínez", team: "away", type: "penalty" },
+      { minute: 55, player: "Mousa Al Tamari", team: "home" },
+      { minute: 80, player: "Lionel Messi", team: "away" },
+    ],
+  },
 };
 
 // Maps each "Best Third (…)" pool to the group-winner letter that slot faces (FIFA R32 schedule).
