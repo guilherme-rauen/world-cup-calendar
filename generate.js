@@ -1537,6 +1537,11 @@ const results = {
       { minute: 80, player: "Lionel Messi", team: "away" },
     ],
   },
+  73: {
+    home: 0,
+    away: 1,
+    goals: [{ minute: 90, stoppage: 2, player: "Stephen Eustaquio", team: "away" }],
+  },
 };
 
 // Maps each "Best Third (…)" pool to the group-winner letter that slot faces (FIFA R32 schedule).
