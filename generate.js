@@ -916,6 +916,8 @@ const qualified = {
 
 // Match results — add an entry after each match day.
 // goals: { minute, player, team: "home" | "away", type?: "og" | "penalty", stoppage?: number }
+// pens: { home, away } — shootout score only (knockout); title shows as 1 (3) x (4) 1
+// penKicks: optional [{ team, player, scored: true|false }] for kick-by-kick notes
 const results = {
   1: {
     home: 2,
@@ -1542,6 +1544,33 @@ const results = {
     away: 1,
     goals: [{ minute: 90, stoppage: 2, player: "Stephen Eustaquio", team: "away" }],
   },
+  74: {
+    home: 1,
+    away: 1,
+    pens: { home: 3, away: 4 },
+    goals: [
+      { minute: 42, player: "Julio Enciso", team: "away" },
+      { minute: 54, player: "Kai Havertz", team: "home" },
+    ],
+  },
+  75: {
+    home: 1,
+    away: 1,
+    pens: { home: 2, away: 3 },
+    goals: [
+      { minute: 72, player: "Cody Gakpo", team: "home" },
+      { minute: 90, stoppage: 1, player: "Issa Diop", team: "away" },
+    ],
+  },
+  76: {
+    home: 2,
+    away: 1,
+    goals: [
+      { minute: 29, player: "Kaishu Sano", team: "away" },
+      { minute: 56, player: "Casemiro", team: "home" },
+      { minute: 90, stoppage: 5, player: "Gabriel Martinelli", team: "home" },
+    ],
+  },
 };
 
 // Maps each "Best Third (…)" pool to the group-winner letter that slot faces (FIFA R32 schedule).
@@ -1763,7 +1792,22 @@ function formatMinute({ minute, stoppage }) {
 
 function formatMatchTitle(home, away, fh, fa, result) {
   if (!result) return `${fh} ${home} vs ${fa} ${away}`;
+  if (result.pens?.home != null && result.pens?.away != null) {
+    return `${fh} ${home} ${result.home} (${result.pens.home}) x (${result.pens.away}) ${result.away} ${fa} ${away}`;
+  }
   return `${fh} ${home} ${result.home} x ${result.away} ${fa} ${away}`;
+}
+
+function resultWinnerSide(result) {
+  if (!result) return null;
+  if (result.pens) {
+    if (result.pens.home > result.pens.away) return "home";
+    if (result.pens.away > result.pens.home) return "away";
+    return null;
+  }
+  if (result.home > result.away) return "home";
+  if (result.away > result.home) return "away";
+  return null;
 }
 
 function resolveKnockoutSlot(slot, visiting = new Set()) {
@@ -1785,8 +1829,9 @@ function resolveKnockoutSlot(slot, visiting = new Set()) {
 
     const result = results[matchN];
     if (result) {
-      if (result.home > result.away && home.flag) return home;
-      if (result.away > result.home && away.flag) return away;
+      const side = resultWinnerSide(result);
+      if (side === "home" && home.flag) return home;
+      if (side === "away" && away.flag) return away;
     }
 
     if (home.flag && away.flag) {
@@ -1844,6 +1889,29 @@ function appendGoals(desc, goals, home, away) {
   if (!goals?.length) return desc;
   const lines = goals.map((g) => formatGoalLine(g, home, away));
   return `${desc}\n\nGoals:\n${lines.join("\n")}`;
+}
+
+function formatPenKickLine(kick, home, away) {
+  const teamName = kick.team === "home" ? home : away;
+  const flag = FLAGS[teamName] || teamName;
+  const mark = kick.scored ? "✓" : "✗";
+  return `${mark} ${kick.player} ${flag}`;
+}
+
+function appendPenalties(desc, result, home, away) {
+  if (!result?.pens) return desc;
+  const fh = FLAGS[home] || home;
+  const fa = FLAGS[away] || away;
+  let block = `${desc}\n\nPenalties:\n${fh} ${home} ${result.pens.home} x ${result.pens.away} ${fa} ${away}`;
+  if (result.penKicks?.length) {
+    const kicks = result.penKicks.map((k) => formatPenKickLine(k, home, away));
+    block += `\n${kicks.join("\n")}`;
+  }
+  return block;
+}
+
+function appendMatchNotes(desc, result, home, away) {
+  return appendPenalties(appendGoals(desc, result?.goals, home, away), result, home, away);
 }
 
 function icsStamp(month, day, etHour, etMin) {
@@ -1928,7 +1996,7 @@ for (const [
     `Group ${grp}`,
     n === 1 ? "Opening Match" : undefined,
   );
-  desc = appendGoals(desc, result?.goals, home, away);
+  desc = appendMatchNotes(desc, result, home, away);
   events.push(
     vevent({
       n,
@@ -1962,10 +2030,10 @@ for (const [
   const awayTitle = formatKnockoutParticipant(away);
   const result = results[n];
   const title = result
-    ? `${homeTitle} ${result.home} x ${result.away} ${awayTitle} — ${round}`
+    ? `${formatMatchTitle(homeTeam.name, awayTeam.name, homeTeam.flag, awayTeam.flag, result)} — ${round}`
     : `${homeTitle} vs ${awayTitle} — ${round}`;
   let desc = formatMatchDescription(n, round);
-  desc = appendGoals(desc, result?.goals, homeTeam.name, awayTeam.name);
+  desc = appendMatchNotes(desc, result, homeTeam.name, awayTeam.name);
   events.push(
     vevent({
       n,
