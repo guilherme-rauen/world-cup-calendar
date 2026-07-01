@@ -1571,6 +1571,32 @@ const results = {
       { minute: 90, stoppage: 5, player: "Gabriel Martinelli", team: "home" },
     ],
   },
+  77: {
+    home: 3,
+    away: 0,
+    goals: [
+      { minute: 45, player: "Kylian Mbappé", team: "home" },
+      { minute: 53, player: "Bradley Barcola", team: "home" },
+      { minute: 74, player: "Kylian Mbappé", team: "home" },
+    ],
+  },
+  78: {
+    home: 1,
+    away: 2,
+    goals: [
+      { minute: 39, player: "Antonio Nusa", team: "away" },
+      { minute: 74, player: "Amad Diallo", team: "home" },
+      { minute: 86, player: "Erling Haaland", team: "away" },
+    ],
+  },
+  79: {
+    home: 2,
+    away: 0,
+    goals: [
+      { minute: 22, player: "Julián Quiñones", team: "home" },
+      { minute: 31, player: "Raúl Jiménez", team: "home" },
+    ],
+  },
 };
 
 // Maps each "Best Third (…)" pool to the group-winner letter that slot faces (FIFA R32 schedule).
