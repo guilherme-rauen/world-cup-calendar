@@ -1597,6 +1597,34 @@ const results = {
       { minute: 31, player: "Raúl Jiménez", team: "home" },
     ],
   },
+  80: {
+    home: 2,
+    away: 1,
+    goals: [
+      { minute: 7, player: "Brian Cipenga", team: "away" },
+      { minute: 75, player: "Harry Kane", team: "home" },
+      { minute: 86, player: "Harry Kane", team: "home" },
+    ],
+  },
+  81: {
+    home: 2,
+    away: 0,
+    goals: [
+      { minute: 45, player: "Folarin Balogun", team: "home" },
+      { minute: 82, player: "Malik Tillman", team: "home" },
+    ],
+  },
+  82: {
+    home: 3,
+    away: 2,
+    goals: [
+      { minute: 24, player: "Habib Diarra", team: "away" },
+      { minute: 51, player: "Ismaïla Sarr", team: "away" },
+      { minute: 86, player: "Romelu Lukaku", team: "home" },
+      { minute: 89, player: "Youri Tielemans", team: "home" },
+      { minute: 120, stoppage: 5, player: "Youri Tielemans", team: "home", type: "penalty" },
+    ],
+  },
 };
 
 // Maps each "Best Third (…)" pool to the group-winner letter that slot faces (FIFA R32 schedule).
