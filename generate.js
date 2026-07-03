@@ -1625,6 +1625,32 @@ const results = {
       { minute: 120, stoppage: 5, player: "Youri Tielemans", team: "home", type: "penalty" },
     ],
   },
+  83: {
+    home: 2,
+    away: 1,
+    goals: [
+      { minute: 53, player: "Ivan Perišić", team: "away" },
+      { minute: 68, player: "Cristiano Ronaldo", team: "home", type: "penalty" },
+      { minute: 90, stoppage: 4, player: "Gonçalo Ramos", team: "home" },
+    ],
+  },
+  84: {
+    home: 3,
+    away: 0,
+    goals: [
+      { minute: 36, player: "Mikel Oyarzabal", team: "home" },
+      { minute: 66, player: "Pedro Porro", team: "home" },
+      { minute: 89, player: "Mikel Oyarzabal", team: "home" },
+    ],
+  },
+  85: {
+    home: 2,
+    away: 0,
+    goals: [
+      { minute: 10, player: "Breel Embolo", team: "home" },
+      { minute: 46, player: "Dan Ndoye", team: "home" },
+    ],
+  },
 };
 
 // Maps each "Best Third (…)" pool to the group-winner letter that slot faces (FIFA R32 schedule).
