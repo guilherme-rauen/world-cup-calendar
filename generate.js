@@ -1651,6 +1651,31 @@ const results = {
       { minute: 46, player: "Dan Ndoye", team: "home" },
     ],
   },
+  86: {
+    home: 3,
+    away: 2,
+    goals: [
+      { minute: 29, player: "Lionel Messi", team: "home" },
+      { minute: 59, player: "Deroy Duarte", team: "away" },
+      { minute: 90, stoppage: 2, player: "Lisandro Martínez", team: "home" },
+      { minute: 103, player: "Sidny Lopes Cabral", team: "away" },
+      { minute: 111, player: "Diney Borges", team: "away", type: "og" },
+    ],
+  },
+  87: {
+    home: 1,
+    away: 0,
+    goals: [{ minute: 14, player: "Jhon Arias", team: "home" }],
+  },
+  88: {
+    home: 1,
+    away: 1,
+    pens: { home: 2, away: 4 },
+    goals: [
+      { minute: 13, player: "Emam Ashour", team: "away" },
+      { minute: 55, player: "Mohamed Hany", team: "away", type: "og" },
+    ],
+  },
 };
 
 // Maps each "Best Third (…)" pool to the group-winner letter that slot faces (FIFA R32 schedule).
