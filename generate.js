@@ -1657,7 +1657,7 @@ const results = {
     goals: [
       { minute: 29, player: "Lionel Messi", team: "home" },
       { minute: 59, player: "Deroy Duarte", team: "away" },
-      { minute: 90, stoppage: 2, player: "Lisandro Martínez", team: "home" },
+      { minute: 93, player: "Lisandro Martínez", team: "home" },
       { minute: 103, player: "Sidny Lopes Cabral", team: "away" },
       { minute: 111, player: "Diney Borges", team: "away", type: "og" },
     ],
