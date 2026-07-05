@@ -1676,6 +1676,20 @@ const results = {
       { minute: 55, player: "Mohamed Hany", team: "away", type: "og" },
     ],
   },
+  89: {
+    home: 0,
+    away: 1,
+    goals: [{ minute: 70, player: "Kylian Mbappé", team: "away", type: "penalty" }],
+  },
+  90: {
+    home: 0,
+    away: 3,
+    goals: [
+      { minute: 50, player: "Azzedine Ounahi", team: "away" },
+      { minute: 82, player: "Azzedine Ounahi", team: "away" },
+      { minute: 90, stoppage: 8, player: "Soufiane Rahimi", team: "away" },
+    ],
+  },
 };
 
 // Maps each "Best Third (…)" pool to the group-winner letter that slot faces (FIFA R32 schedule).
