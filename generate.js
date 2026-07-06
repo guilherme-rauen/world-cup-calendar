@@ -1690,6 +1690,26 @@ const results = {
       { minute: 90, stoppage: 8, player: "Soufiane Rahimi", team: "away" },
     ],
   },
+  91: {
+    home: 1,
+    away: 2,
+    goals: [
+      { minute: 79, player: "Erling Haaland", team: "away" },
+      { minute: 90, player: "Erling Haaland", team: "away" },
+      { minute: 90, stoppage: 10, player: "Neymar", team: "home", type: "penalty" },
+    ],
+  },
+  92: {
+    home: 2,
+    away: 3,
+    goals: [
+      { minute: 36, player: "Jude Bellingham", team: "away" },
+      { minute: 38, player: "Jude Bellingham", team: "away" },
+      { minute: 42, player: "Julián Quiñones", team: "home" },
+      { minute: 60, player: "Harry Kane", team: "away", type: "penalty" },
+      { minute: 69, player: "Raúl Jiménez", team: "home", type: "penalty" },
+    ],
+  },
 };
 
 // Maps each "Best Third (…)" pool to the group-winner letter that slot faces (FIFA R32 schedule).
