@@ -1710,6 +1710,22 @@ const results = {
       { minute: 69, player: "Raúl Jiménez", team: "home", type: "penalty" },
     ],
   },
+  93: {
+    home: 0,
+    away: 1,
+    goals: [{ minute: 90, stoppage: 1, player: "Mikel Merino", team: "away" }],
+  },
+  94: {
+    home: 1,
+    away: 4,
+    goals: [
+      { minute: 9, player: "Charles De Ketelaere", team: "away" },
+      { minute: 31, player: "Malik Tillman", team: "home" },
+      { minute: 33, player: "Charles De Ketelaere", team: "away" },
+      { minute: 57, player: "Hans Vanaken", team: "away" },
+      { minute: 90, stoppage: 3, player: "Romelu Lukaku", team: "away" },
+    ],
+  },
 };
 
 // Maps each "Best Third (…)" pool to the group-winner letter that slot faces (FIFA R32 schedule).
