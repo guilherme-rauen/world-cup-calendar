@@ -1726,6 +1726,22 @@ const results = {
       { minute: 90, stoppage: 3, player: "Romelu Lukaku", team: "away" },
     ],
   },
+  95: {
+    home: 3,
+    away: 2,
+    goals: [
+      { minute: 15, player: "Yasser Ibrahim", team: "away" },
+      { minute: 67, player: "Mostafa Zico", team: "away" },
+      { minute: 79, player: "Cristian Romero", team: "home" },
+      { minute: 83, player: "Lionel Messi", team: "home" },
+      { minute: 90, stoppage: 2, player: "Enzo Fernández", team: "home" },
+    ],
+  },
+  96: {
+    home: 0,
+    away: 0,
+    pens: { home: 4, away: 3 },
+  },
 };
 
 // Maps each "Best Third (…)" pool to the group-winner letter that slot faces (FIFA R32 schedule).
