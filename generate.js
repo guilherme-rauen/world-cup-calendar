@@ -1742,6 +1742,14 @@ const results = {
     away: 0,
     pens: { home: 4, away: 3 },
   },
+  97: {
+    home: 2,
+    away: 0,
+    goals: [
+      { minute: 60, player: "Kylian Mbappé", team: "home" },
+      { minute: 66, player: "Ousmane Dembélé", team: "home" },
+    ],
+  },
 };
 
 // Maps each "Best Third (…)" pool to the group-winner letter that slot faces (FIFA R32 schedule).
