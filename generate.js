@@ -1750,6 +1750,15 @@ const results = {
       { minute: 66, player: "Ousmane Dembélé", team: "home" },
     ],
   },
+  98: {
+    home: 2,
+    away: 1,
+    goals: [
+      { minute: 30, player: "Fabián Ruiz", team: "home" },
+      { minute: 41, player: "Charles De Ketelaere", team: "away" },
+      { minute: 88, player: "Mikel Merino", team: "home" },
+    ],
+  },
 };
 
 // Maps each "Best Third (…)" pool to the group-winner letter that slot faces (FIFA R32 schedule).
