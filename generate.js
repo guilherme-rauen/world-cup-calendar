@@ -1759,6 +1759,25 @@ const results = {
       { minute: 88, player: "Mikel Merino", team: "home" },
     ],
   },
+  99: {
+    home: 1,
+    away: 2,
+    goals: [
+      { minute: 36, player: "Andreas Schjelderup", team: "home" },
+      { minute: 45, stoppage: 2, player: "Jude Bellingham", team: "away" },
+      { minute: 93, player: "Jude Bellingham", team: "away" },
+    ],
+  },
+  100: {
+    home: 3,
+    away: 1,
+    goals: [
+      { minute: 10, player: "Alexis Mac Allister", team: "home" },
+      { minute: 67, player: "Dan Ndoye", team: "away" },
+      { minute: 112, player: "Julián Álvarez", team: "home" },
+      { minute: 120, stoppage: 1, player: "Lautaro Martínez", team: "home" },
+    ],
+  },
 };
 
 // Maps each "Best Third (…)" pool to the group-winner letter that slot faces (FIFA R32 schedule).
