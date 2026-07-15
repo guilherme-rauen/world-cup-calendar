@@ -1778,6 +1778,14 @@ const results = {
       { minute: 120, stoppage: 1, player: "Lautaro Martínez", team: "home" },
     ],
   },
+  101: {
+    home: 0,
+    away: 2,
+    goals: [
+      { minute: 22, player: "Mikel Oyarzabal", team: "away", type: "penalty" },
+      { minute: 58, player: "Pedro Porro", team: "away" },
+    ],
+  },
 };
 
 // Maps each "Best Third (…)" pool to the group-winner letter that slot faces (FIFA R32 schedule).
