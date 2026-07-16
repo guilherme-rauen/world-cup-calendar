@@ -1786,6 +1786,15 @@ const results = {
       { minute: 58, player: "Pedro Porro", team: "away" },
     ],
   },
+  102: {
+    home: 1,
+    away: 2,
+    goals: [
+      { minute: 55, player: "Anthony Gordon", team: "home" },
+      { minute: 85, player: "Enzo Fernández", team: "away" },
+      { minute: 90, stoppage: 2, player: "Lautaro Martínez", team: "away" },
+    ],
+  },
 };
 
 // Maps each "Best Third (…)" pool to the group-winner letter that slot faces (FIFA R32 schedule).
@@ -2047,6 +2056,39 @@ function resolveKnockoutSlot(slot, visiting = new Set()) {
       const side = resultWinnerSide(result);
       if (side === "home" && home.flag) return home;
       if (side === "away" && away.flag) return away;
+    }
+
+    if (home.flag && away.flag) {
+      return {
+        name: `${home.flag} ${home.name} | ${away.flag} ${away.name}`,
+        flag: "",
+      };
+    }
+
+    return { name: slot, flag: "" };
+  }
+
+  const loserMatch = slot.match(/^Loser Match (\d+)$/);
+  if (loserMatch) {
+    const matchN = Number(loserMatch[1]);
+    if (visiting.has(matchN)) return { name: slot, flag: "" };
+    visiting.add(matchN);
+
+    const fixture = knockoutFixtures[matchN];
+    if (!fixture) {
+      visiting.delete(matchN);
+      return { name: slot, flag: "" };
+    }
+
+    const home = resolveKnockoutSlot(fixture.home, visiting);
+    const away = resolveKnockoutSlot(fixture.away, visiting);
+    visiting.delete(matchN);
+
+    const result = results[matchN];
+    if (result) {
+      const side = resultWinnerSide(result);
+      if (side === "home" && away.flag) return away;
+      if (side === "away" && home.flag) return home;
     }
 
     if (home.flag && away.flag) {
