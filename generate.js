@@ -1795,6 +1795,27 @@ const results = {
       { minute: 90, stoppage: 2, player: "Lautaro Martínez", team: "away" },
     ],
   },
+  103: {
+    home: 4,
+    away: 6,
+    goals: [
+      { minute: 3, player: "Declan Rice", team: "away" },
+      { minute: 18, player: "Ezri Konsa", team: "away" },
+      { minute: 37, player: "Bukayo Saka", team: "away" },
+      { minute: 45, stoppage: 1, player: "Bukayo Saka", team: "away" },
+      { minute: 48, player: "Kylian Mbappé", team: "home" },
+      { minute: 54, player: "Bradley Barcola", team: "home" },
+      { minute: 66, player: "Kylian Mbappé", team: "home" },
+      { minute: 87, player: "Bukayo Saka", team: "away", type: "penalty" },
+      { minute: 90, stoppage: 6, player: "Ousmane Dembélé", team: "home" },
+      { minute: 90, stoppage: 8, player: "Jude Bellingham", team: "away" },
+    ],
+  },
+  104: {
+    home: 1,
+    away: 0,
+    goals: [{ minute: 106, player: "Ferran Torres", team: "home" }],
+  },
 };
 
 // Maps each "Best Third (…)" pool to the group-winner letter that slot faces (FIFA R32 schedule).
